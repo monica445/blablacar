@@ -16,13 +16,14 @@ class BlaBlaApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: appTheme,
       home: Scaffold(
-        body: Column(
-          children: [
-            BlaButton(text: "Primary Button", onPressed: (){},),
-            const SizedBox(height: 20,),
-            BlaButton(text: "Secondary Button", onPressed: (){}, type: BlaButtonType.secondary, icon: Icons.thumb_up,)
-          ],
-        )
+        body: RidePrefScreen()
+        // body: Column(
+        //   children: [
+        //     BlaButton(text: "Primary Button", onPressed: (){},),
+        //     const SizedBox(height: 20,),
+        //     BlaButton(text: "Secondary Button", onPressed: (){}, type: BlaButtonType.secondary, icon: Icons.thumb_up,)
+        //   ],
+        // )
       ),
     );
   }

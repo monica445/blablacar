@@ -27,9 +27,9 @@ class BlaButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox( //SizeBox help determine size of button
+    return SizedBox( 
       width: width ?? double.infinity,
-      height: 48,
+      height: height ?? 48,
       child: ElevatedButton(
         onPressed: onPressed, 
         style: ElevatedButton.styleFrom(
