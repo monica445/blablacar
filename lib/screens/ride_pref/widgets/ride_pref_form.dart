@@ -47,6 +47,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
       arrival = widget.initRidePref!.arrival;
       departureDate = widget.initRidePref!.departureDate;
       requestedSeats = widget.initRidePref!.requestedSeats;
+      
     } else {
       departure = null;
       arrival = null;
@@ -99,7 +100,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: departureDate,
-      firstDate: DateTime(now.year, now.month, now.day), // disable past dates
+      firstDate: DateTime(now.year, now.month, now.day), 
       lastDate: now.add(const Duration(days: 365)),
       builder: (context, child) {
         return Theme(
