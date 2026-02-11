@@ -4,7 +4,7 @@ enum BlaButtonType { primary, secondary }
 
 class BlaButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final IconData? icon;
   final BlaButtonType type;
   final double? width;

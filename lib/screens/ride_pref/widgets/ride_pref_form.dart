@@ -1,3 +1,4 @@
+import 'package:blabla/screens/location/location_screen.dart';
 import 'package:blabla/screens/ride/ride_screen.dart';
 import 'package:blabla/screens/ride_pref/widgets/ride_pref_seat_selection.dart';
 import 'package:blabla/theme/theme.dart';
@@ -47,7 +48,6 @@ class _RidePrefFormState extends State<RidePrefForm> {
       arrival = widget.initRidePref!.arrival;
       departureDate = widget.initRidePref!.departureDate;
       requestedSeats = widget.initRidePref!.requestedSeats;
-      
     } else {
       departure = null;
       arrival = null;
@@ -71,7 +71,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   Future<void> _selectDeparture() async {
     final Location? selectedDeparture = await Navigator.push<Location>(
       context,
-      MaterialPageRoute(builder: (_) => const RideScreen()),
+      MaterialPageRoute(builder: (_) => const LocationScreen()),
     );
 
     if (selectedDeparture != null) {
@@ -84,7 +84,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
   Future<void> _selectArrival() async {
     final Location? selectedArrival = await Navigator.push<Location>(
       context,
-      MaterialPageRoute(builder: (_) => const RideScreen()),
+      MaterialPageRoute(builder: (_) => const LocationScreen()),
     );
 
     if (selectedArrival != null) {
@@ -100,14 +100,14 @@ class _RidePrefFormState extends State<RidePrefForm> {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
       initialDate: departureDate,
-      firstDate: DateTime(now.year, now.month, now.day), 
+      firstDate: DateTime(now.year, now.month, now.day),
       lastDate: now.add(const Duration(days: 365)),
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: ColorScheme.light(
-              primary: BlaColors.primary, 
-              onPrimary: BlaColors.white, 
+              primary: BlaColors.primary,
+              onPrimary: BlaColors.white,
               onSurface: BlaColors.neutralDark,
             ),
             dialogTheme: DialogThemeData(backgroundColor: BlaColors.white),
@@ -126,7 +126,6 @@ class _RidePrefFormState extends State<RidePrefForm> {
       });
     }
   }
-
 
   Future<void> _selectSeats() async {
     final int? selectedSeats = await Navigator.push<int>(
@@ -194,7 +193,22 @@ class _RidePrefFormState extends State<RidePrefForm> {
           isPlaceholder: false,
           onPressed: _selectSeats,
         ),
-        BlaButton(text: "Search", onPressed: () {}),
+        BlaButton(
+          text: "Search",
+          onPressed: departure != null
+            ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => RideScreen(
+                        departure: departure!,
+                        requestedSeats: requestedSeats,
+                      ),
+                    ),
+                  );
+                }
+              : null,
+        ),
       ],
     );
   }
