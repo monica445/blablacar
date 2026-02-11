@@ -51,7 +51,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
     } else {
       departure = null;
       arrival = null;
-      departureDate = DateTime.now().subtract(const Duration(days: 7));
+      departureDate = DateTime.now();
       requestedSeats = 1;
     }
   }
