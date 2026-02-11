@@ -6,18 +6,31 @@ import 'package:flutter/material.dart';
 
 class RideScreen extends StatelessWidget {
   final Location departure;
+  final Location arrival;
   final int requestedSeats;
 
   const RideScreen({
     super.key,
     required this.departure,
+    required this.arrival,
     required this.requestedSeats,
   });
 
   @override
   Widget build(BuildContext context) {
+
+    if (departure == arrival) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Available rides')),
+        body: const Center(
+          child: Text("Can't find this ride. You need to choose a destination that is different from you starting point to find a ride"),
+        ),
+      );
+    }
+
     final List<Ride> rides = RidesService.filterBy(
       departure: departure,
+      arrival: arrival,
       seatRequested: requestedSeats,
     );
     

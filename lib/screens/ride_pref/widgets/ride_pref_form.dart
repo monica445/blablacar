@@ -142,6 +142,29 @@ class _RidePrefFormState extends State<RidePrefForm> {
     }
   }
 
+  void _handleSearch () async {
+    if (departure == null) {
+      await _selectDeparture();
+      return;
+    }
+
+    if (arrival == null) {
+      await _selectArrival();
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => RideScreen(
+          departure: departure!,
+          arrival: arrival!,
+          requestedSeats: requestedSeats,
+        ),
+      ),
+    );
+  }
+
   // ----------------------------------
   // Compute the widgets rendering
   // ----------------------------------
@@ -195,19 +218,7 @@ class _RidePrefFormState extends State<RidePrefForm> {
         ),
         BlaButton(
           text: "Search",
-          onPressed: departure != null
-            ? () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => RideScreen(
-                        departure: departure!,
-                        requestedSeats: requestedSeats,
-                      ),
-                    ),
-                  );
-                }
-              : null,
+          onPressed: _handleSearch
         ),
       ],
     );
